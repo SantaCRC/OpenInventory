@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-02 00:10-0600\n"
+"POT-Creation-Date: 2022-12-02 17:12-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\dashboard.html:5
+#: .\dashboard\templates\add.html:6
+msgid "Add inventory"
+msgstr ""
+
+#: .\dashboard\templates\add.html:7
+msgid "Add inventory description"
+msgstr ""
+
+#: .\dashboard\templates\dashboard.html:6
 msgid "Welcome to Open Inventory"
 msgstr ""
 
-#: .\templates\dashboard.html:6
+#: .\dashboard\templates\dashboard.html:7
 msgid "description of Open Inventory"
-msgstr "Open Inventory is a free and open source inventory management system."
+msgstr ""
+
+#: .\dashboard\templates\settings.html:6
+msgid "Settings"
+msgstr ""
+
+#: .\dashboard\templates\settings.html:7
+msgid "Main settings"
+msgstr ""

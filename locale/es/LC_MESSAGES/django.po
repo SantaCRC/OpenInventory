@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-02 17:12-0600\n"
+"POT-Creation-Date: 2022-12-02 16:55-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,26 +18,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\dashboard\templates\add.html:6
+#: .\static\templates\menu.html:57
+msgid "Home"
+msgstr "Inicio"
+
+#: .\static\templates\menu.html:64
+msgid "Search"
+msgstr "Buscar"
+
+#: .\static\templates\menu.html:71
 msgid "Add inventory"
 msgstr "Agregar inventario"
 
-#: .\dashboard\templates\add.html:7
-msgid "Add inventory description"
-msgstr "Agregar productos al inventario"
+#: .\static\templates\menu.html:77
+msgid "Datasheets"
+msgstr "Hoja de datos"
 
-#: .\dashboard\templates\dashboard.html:6
-msgid "Welcome to Open Inventory"
-msgstr "Bienvenido a Open Inventory"
+#: .\static\templates\menu.html:83
+msgid "Tools"
+msgstr "Herramientas"
 
-#: .\dashboard\templates\dashboard.html:7
-msgid "description of Open Inventory"
-msgstr "Open Inventory es un sistema de inventario de código abierto"
-
-#: .\dashboard\templates\settings.html:6
+#: .\static\templates\menu.html:89
 msgid "Settings"
 msgstr "Configuración"
-
-#: .\dashboard\templates\settings.html:7
-msgid "Main settings"
-msgstr "Ajustes principales"
