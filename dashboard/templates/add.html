@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html>
 <body>
+
 {% extends 'menu.html' %}
+{% load static %}
 {% block pagecontent %}
 <h1>{{_("Add inventory")}}</h1>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
 <h2>{{_("Add inventory description")}}</h2>
-form 
+{% load crispy_forms_tags %}  
+
+        
+        <div class="form" style="text-align:center">
+          <!--Django Model Form-->
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{product_form|crispy}}
+                <button class="btn btn-primary my-4" type="submit">Submit</button>
+          </form>
+          <!--Django Model-->
+          <h2 class="my-4">Movies</h2>
+          <div class="row">
+            {% for m in movies %}
+            <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+              <div class="card h-100 p-4">
+                <img src="{{ m.movie_poster.url }}" class="card-img-top" alt="{{ m.movie_title}}">
+                <h4>{{m.movie_title}}</h4>
+                <p class="text-muted">{{m.release_year}} | {{m.director}}</p>
+                <p>{{m.movie_plot}}</p>
+              </div>
+            </div>
+            {% empty %}
+            <p>No movies added.</p>
+            {% endfor %}
+          </div>
+        </div>
+    
 {% endblock %}
 </body>
 </html>
