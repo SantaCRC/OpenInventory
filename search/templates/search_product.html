@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-{% load i18n %}
-<h1>{{_("Search in inventory")}}</h1>
-<p>Welcome to my first Django project!</p>
 
+{% extends 'menu.html' %}
+{% load static %}
+{% block pagecontent %}
+<h1>{{_("Search")}}</h1>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+{% load crispy_forms_tags %}  
+
+{% endblock %}
 </body>
 </html>
