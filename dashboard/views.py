@@ -18,7 +18,7 @@ def add(request):
     else:
       messages.error(request, "Error al agregar el producto")
     
-    return redirect('add')
+    return redirect('dashboard:add')
   else:
     product_form = ProductForm()
     products = Product.objects.all()
