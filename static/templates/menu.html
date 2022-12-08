@@ -390,6 +390,9 @@
           </div>
         </div>
       </div>
-      <script src="{% static 'js/tabler.min.js' %}" defer></script>
+      <div class="page-wrapper">
+      {% block pagecontent %}
+      {% endblock %}
+      </div>
   </body>
 </html>

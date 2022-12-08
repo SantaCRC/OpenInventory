@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-02 16:55-0600\n"
+"POT-Creation-Date: 2022-12-07 20:26-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,26 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\static\templates\menu.html:57
+#: .\static\templates\menu.html:9
+#, fuzzy
+#| msgid "Add inventory"
+msgid "Open Inventory"
+msgstr "Agregar inventario"
+
+#: .\static\templates\menu.html:171
 msgid "Home"
 msgstr "Inicio"
 
-#: .\static\templates\menu.html:64
-msgid "Search"
-msgstr "Buscar"
-
-#: .\static\templates\menu.html:71
+#: .\static\templates\menu.html:190
 msgid "Add inventory"
 msgstr "Agregar inventario"
 
-#: .\static\templates\menu.html:77
-msgid "Datasheets"
-msgstr "Hoja de datos"
+#~ msgid "Search"
+#~ msgstr "Buscar"
 
-#: .\static\templates\menu.html:83
-msgid "Tools"
-msgstr "Herramientas"
+#~ msgid "Datasheets"
+#~ msgstr "Hoja de datos"
 
-#: .\static\templates\menu.html:89
-msgid "Settings"
-msgstr "Configuración"
+#~ msgid "Tools"
+#~ msgstr "Herramientas"
+
+#~ msgid "Settings"
+#~ msgstr "Configuración"

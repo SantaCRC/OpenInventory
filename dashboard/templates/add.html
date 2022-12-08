@@ -1,48 +1,174 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <style>
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
-{% extends 'menu.html' %}
-{% load static %}
-{% block pagecontent %}
-<h1>{{_("Add inventory")}}</h1>
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
+      /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
 
-<h2>{{_("Add inventory description")}}</h2>
-{% load crispy_forms_tags %}  
+    {% extends 'menu.html' %} 
+    {% load static %} 
+    {% block pagecontent %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    {% load crispy_forms_tags %}
+    <div class="page-header d-print-none">
+      <div class="container-xl">
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              Form elements
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-xl">
+      <div class="page-body">
+        <div class="card-body">
+          <form class="card" method="post" action="{% url 'dashboard:add' %}"
+          enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-header">
+              <h3 class="card-title">{{_("Add new product")}}</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label required">{{_('Name')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="{{_('Enter name')}}"
+                    name="name"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_("Description")}}</label>
+                <textarea
+                  class="form-control"
+                  rows="6"
+                  placeholder="{{_('Enter description')}}"
+                  name="description"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_('Stock')}}</label>
+                <div class="input-group mb-2">
+                  <input
+                    type="number"
+                    class="form-control"
+                    autocomplete="off"
+                    name="stock"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_('Price')}}</label>
+                <div class="input-group mb-2">
+                  <span class="input-group-text"> $ </span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    autocomplete="off"
+                    name="price"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_('Category')}}</label>
+                <select
+                  type="text"
+                  class="form-select"
+                  placeholder="Select a date"
+                  id="select-tags"
+                  value=""
+                >
+                  <option value="HTML">HTML</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="CSS">CSS</option>
+                  <option value="jQuery">jQuery</option>
+                  <option value="Bootstrap">Bootstrap</option>
+                  <option value="Ruby">Ruby</option>
+                  <option value="Python">Python</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <div class="form-label">{{_("Image")}}</div>
+                <input type="file" class="form-control" name="image" accept="image/*"/>
+              </div>
+            </div>
+            <div class="card-footer text-end">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-<form method="post" action="{% url 'dashboard:add' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-<div class="form">
-    <div class="title">{{_("Add new product")}}</div>
-    <div class="input-container ic1">
-        
-      <input id="name" class="input" type="text" placeholder=" " name="name" />
-      <div class="cut"></div>
-      <label for="firstname" class="placeholder">Name</label>
-    </div>
-    <div class="input-container ic2">
-      <input id="description" class="input" type="text" placeholder=" " name="description" />
-      <div class="cut"></div>
-      <label for="lastname" class="placeholder">Description</label>
-    </div>
-    <div class="input-container ic2">
-      <input id="price" class="input" type="number" placeholder=" " name="price"/>
-      <div class="cut cut-short"></div>
-      <label for="email" class="placeholder">Price</>
-    </div>
-    <div class="input-container ic2">
-      <input id="price" class="input" type="number" placeholder=" " name="stock"/>
-      <div class="cut cut-short"></div>
-      <label for="email" class="placeholder">Stock</>
-    </div>
-    <div class="input-container ic2">
-      <label for="img">Select image:</label>
-      <input type="file" id="image" name="image" accept="image/*">
-    </div>
-    <button type="submit" class="submit">submit</button>
-  </div>
-</form>
-{% endblock %}
-</body>
+    <script src="{% static 'js/demo.min.js' %}" defer></script>
+    <script src="{% static 'js/tabler.min.js' %}" defer></script>
+    <script
+      src="{% static 'libs/nouislider/dist/nouislider.min.js' %}"
+      defer
+    ></script>
+    <script
+      src="{% static 'libs/litepicker/dist/litepicker.js' %}"
+      defer
+    ></script>
+    <script
+      src="{% static 'libs/tom-select/dist/js/tom-select.base.min.js' %}"
+      defer
+    ></script>
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+        var el;
+        window.TomSelect &&
+          new TomSelect((el = document.getElementById("select-tags")), {
+            copyClassesToDropdown: false,
+            dropdownClass: "dropdown-menu ts-dropdown",
+            optionClass: "dropdown-item",
+            controlInput: "<input>",
+            render: {
+              item: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+              option: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+            },
+          });
+      });
+      // @formatter:on
+    </script>
+    {% endblock %}
+  </body>
 </html>
