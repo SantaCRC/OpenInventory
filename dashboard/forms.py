@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Category
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, ButtonHolder, Submit
 
@@ -7,12 +7,16 @@ class ProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_show_labels = False 
-        
-    name = forms.CharField(label='Name', max_length=200, widget=forms.TextInput(attrs={
-      'class': 'input',
-       'placeholder' : 'Enter Name Here '
-     }))
+        self.helper.form_show_labels = False # hide labels
     class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'stock', 'category','image']
+
+class CategoryForm(forms.ModelForm):
+  def __init__(self, *args, **kwargs):
+    super(CategoryForm, self).__init__(*args, **kwargs)
+    self.helper = FormHelper()
+    self.helper.form_show_labels = False # hide labels
+  class Meta:
+      model = Category
+      fields = ['name', 'description', 'parent_category']

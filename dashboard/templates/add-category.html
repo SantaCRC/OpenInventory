@@ -69,7 +69,7 @@
                   placeholder="Select a date"
                   id="select-tags"
                   value=""
-                  name="parent-category"
+                  name="parent_category"
                 >
                   <option value="HTML">HTML</option>
                   <option value="JavaScript">JavaScript</option>
@@ -80,13 +80,9 @@
                   <option value="Python">Python</option>
                 </select>
               </div>
-              <div class="mb-3">
-                <div class="form-label">{{_("Image")}}</div>
-                <input type="file" class="form-control" name="image" accept="image/*"/>
-              </div>
             </div>
             <div class="card-footer text-end">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">{{_('Submit')}}</button>
             </div>
           </form>
         </div>

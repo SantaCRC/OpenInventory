@@ -27,5 +27,15 @@ def add(request):
 
 def add_category(request):
   if request.method == "POST":
-    pass
+    category_form = CategoryForm(request.POST)
+    if category_form.is_valid():
+      category_form.save()
+      messages.success(request, "Categoría agregada correctamente")
+    else:
+      messages.error(request, "Error al agregar la categoría")
+      messages.error(request, category_form.errors)
+    return redirect('dashboard:category')
+  else:
+    category_form = CategoryForm()
+  
   return render(request, 'add-category.html', {"title": "Agregar Categoría"})
