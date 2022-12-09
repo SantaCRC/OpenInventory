@@ -172,14 +172,9 @@
                       </span>
                     </a>
                   </li>
-                  {% url 'dashboard:add' as the_url %}
-                  {% if request.path == the_url %}
-                  <li class="nav-item active">
-                  {% else %}
-                  <li class="nav-item">
-                  {% endif %}
-                    <a class="nav-link" href="{% url 'dashboard:add' %}">
-                      <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                      <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                           <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -187,9 +182,43 @@
                        </svg>
                       </span>
                       <span class="nav-link-title">
-                        {{_('Add inventory')}}
+                        {{_('Add')}}
                       </span>
                     </a>
+                    <div class="dropdown-menu">
+                      <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                          <a class="dropdown-item" href="{% url 'dashboard:add' %}">
+                            {{_('Product')}}
+                          </a>
+                          <a class="dropdown-item" href="{% url 'dashboard:category' %}">
+                            {{_('Category')}}
+                          </a>
+                          <a class="dropdown-item" href="./invoice.html">
+                            {{_('Project')}}
+                          </a>
+                          <a class="dropdown-item" href="./search-results.html">
+                            Search results
+                          </a>
+                          <a class="dropdown-item" href="./pricing.html">
+                            Pricing cards
+                          </a>
+                          <a class="dropdown-item" href="./pricing-table.html">
+                            Pricing table
+                          </a>
+                          <a class="dropdown-item" href="./faq.html">
+                            FAQ
+                            <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                          </a>
+                          <a class="dropdown-item" href="./users.html">
+                            Users
+                          </a>
+                          <a class="dropdown-item" href="./license.html">
+                            License
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="./form-elements.html" >
@@ -197,7 +226,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 11 12 14 20 6" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
                       </span>
                       <span class="nav-link-title">
-                        Form elements
+                        {{_('')}}
                       </span>
                     </a>
                   </li>
@@ -394,5 +423,19 @@
       {% block pagecontent %}
       {% endblock %}
       </div>
+      <script src="{% static 'js/demo.min.js' %}" defer></script>
+    <script src="{% static 'js/tabler.min.js' %}" defer></script>
+    <script
+      src="{% static 'libs/nouislider/dist/nouislider.min.js' %}"
+      defer
+    ></script>
+    <script
+      src="{% static 'libs/litepicker/dist/litepicker.js' %}"
+      defer
+    ></script>
+    <script
+      src="{% static 'libs/tom-select/dist/js/tom-select.base.min.js' %}"
+      defer
+    ></script>
   </body>
 </html>

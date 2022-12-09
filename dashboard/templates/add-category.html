@@ -25,7 +25,7 @@
         <div class="row g-2 align-items-center">
           <div class="col">
             <h2 class="page-title">
-              {{_("New product")}}
+              {{_("New category")}}
             </h2>
           </div>
         </div>
@@ -34,11 +34,11 @@
     <div class="container-xl">
       <div class="page-body">
         <div class="card-body">
-          <form class="card" method="post" action="{% url 'dashboard:add' %}"
+          <form class="card" method="post" action="{% url 'dashboard:category' %}"
           enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card-header">
-              <h3 class="card-title">{{_("Add new product")}}</h3>
+              <h3 class="card-title">{{_("Add new category")}}</h3>
             </div>
             <div class="card-body">
               <div class="mb-3">
@@ -62,37 +62,14 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label class="form-label">{{_('Stock')}}</label>
-                <div class="input-group mb-2">
-                  <input
-                    type="number"
-                    class="form-control"
-                    autocomplete="off"
-                    name="stock"
-                  />
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">{{_('Price')}}</label>
-                <div class="input-group mb-2">
-                  <span class="input-group-text"> $ </span>
-                  <input
-                    type="number"
-                    class="form-control"
-                    autocomplete="off"
-                    name="price"
-                  />
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">{{_('Category')}}</label>
+                <label class="form-label">{{_('Parent category')}}</label>
                 <select
                   type="text"
                   class="form-select"
                   placeholder="Select a date"
                   id="select-tags"
                   value=""
-                  name="category"
+                  name="parent-category"
                 >
                   <option value="HTML">HTML</option>
                   <option value="JavaScript">JavaScript</option>

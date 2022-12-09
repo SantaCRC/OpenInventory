@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from dashboard.models import Product
-from dashboard.forms import ProductForm
+from dashboard.forms import ProductForm, CategoryForm
 from django.contrib import messages
 
 def index(request):
@@ -24,3 +24,8 @@ def add(request):
     product_form = ProductForm()
     products = Product.objects.all()
   return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products})
+
+def add_category(request):
+  if request.method == "POST":
+    pass
+  return render(request, 'add-category.html', {"title": "Agregar Categoría"})
