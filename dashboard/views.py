@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from dashboard.models import Product
+from dashboard.models import Product, Category
 from dashboard.forms import ProductForm, CategoryForm
 from django.contrib import messages
 
@@ -23,7 +23,8 @@ def add(request):
   else:
     product_form = ProductForm()
     products = Product.objects.all()
-  return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products})
+    categories = Category.objects.all()
+  return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories})
 
 def add_category(request):
   if request.method == "POST":
@@ -39,3 +40,30 @@ def add_category(request):
     category_form = CategoryForm()
   
   return render(request, 'add-category.html', {"title": "Agregar Categoría"})
+
+def search(request):
+  if request.method == "GET":
+    product_name = request.GET.get('product_name')
+    products = Product.objects.filter(name__icontains=product_name)
+    return render(request, 'search.html', {"title": "Buscar Producto", "products": products})
+  else:
+    pass
+  
+  return
+
+def get_product(request):
+  if request.method == "GET":
+    product_id = request.GET.get('product_id')
+    product = Product.objects.get(id=product_id)
+    category = Category.objects.get(id=product.category)
+    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category})
+  else:
+    pass
+  
+  return render(request, 'product.html', {"title": "Producto", "product": 'Ninguno'})
+
+def settings(request):
+  if request.method == "POST":
+    
+  
+  return render(request, 'settings.html', {"title": "Configuración"})

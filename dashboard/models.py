@@ -20,3 +20,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+        verbose_name = "Category"
+    
+# Settings model
+class Settings(models.Model):
+    conf_currency = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Settings"
+        verbose_name = "Setting"

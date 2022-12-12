@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'search.apps.SearchConfig',
     'dashboard.apps.DashboardConfig',
     'crispy_forms',
+    'dynamic_preferences',
 ]
 
 MIDDLEWARE = [
