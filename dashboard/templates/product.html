@@ -56,13 +56,13 @@
                 </div>
                 <div class="datagrid-item">
                   <div class="datagrid-title">{{_('Price')}}</div>
-                  <div class="datagrid-content">{{product.price}}</div>
+                  <div class="datagrid-content">{{currency}} {{product.price}}</div>
                 </div>
                 <div class="datagrid-item">
-                  <div class="datagrid-title">{{_('Name')}}</div>
+                  <div class="datagrid-title">{{_('Category')}}</div>
                   <div class="datagrid-content">
                     <div class="d-flex align-items-center">
-                        {{ product.name}}
+                        {{ category }}
                     </div>
                   </div>
                 </div>
@@ -91,34 +91,176 @@
                     </div>
                   </div>
                 </div>
-                <div class="datagrid-item">
-                  <div class="datagrid-title">{{_('Category')}}</div>
-                  <div class="datagrid-content">
-                    {{ category}}
-                    </label>
+              </div>
+            </div>
+            <div class="card-footer text-end">
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-stock">
+                    {{_('Add stock')}}
+                  </a>
+                  <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-update">
+                    {{_('Update product')}}
+                  </a>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal modal-blur fade" id="modal-update" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{_('Edit product')}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">{{_('Name')}}</label>
+                <input type="text" class="form-control" name="name" value="{{product.name}}">
+              </div>
+              
+              <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                      <label class="form-label">{{_('Description')}}</label>
+                      <textarea class="form-control" rows="3">{{product.description}}</textarea>
+                    </div>
+                  </div>
+                <div class="col-lg-8">
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{_('Stock')}}</label>
+                    <input type="number" class="form-control" value="{{product.stock}}">
                   </div>
                 </div>
-                <div class="datagrid-item">
-                  <div class="datagrid-title">Icon</div>
-                  <div class="datagrid-content">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-green" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-                    Checked
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{_('Price')}}</label>
+                    <input type="number" class="form-control" value="{{product.price}}">
                   </div>
                 </div>
-                <div class="datagrid-item">
-                  <div class="datagrid-title">Form control</div>
-                  <div class="datagrid-content">
-                    <input type="text" class="form-control form-control-flush" placeholder="Input placeholder">
-                  </div>
-                </div>
-                <div class="datagrid-item">
-                  <div class="datagrid-title">Longer description</div>
-                  <div class="datagrid-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                <div class="col-lg-12">
+                  <div>
+                    <label class="form-label">Additional information</label>
+                    <textarea class="form-control" rows="3"></textarea>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                Cancel
+              </a>
+              <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Create new report
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal modal-blur fade" id="modal-stock" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{_('Add stock')}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">{{_('Name')}}</label>
+                <input type="text" class="form-control" name="example-text-input" value="Your report name">
+              </div>
+              <label class="form-label">Report type</label>
+              <div class="form-selectgroup-boxes row mb-3">
+                <div class="col-lg-6">
+                  <label class="form-selectgroup-item">
+                    <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked="">
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Simple</span>
+                        <span class="d-block text-muted">Provide only basic data needed for the report</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col-lg-6">
+                  <label class="form-selectgroup-item">
+                    <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                      <span class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                      </span>
+                      <span class="form-selectgroup-label-content">
+                        <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                        <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="mb-3">
+                    <label class="form-label">Report url</label>
+                    <div class="input-group input-group-flat">
+                      <span class="input-group-text">
+                        https://tabler.io/reports/
+                      </span>
+                      <input type="text" class="form-control ps-0" value="report-01" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="mb-3">
+                    <label class="form-label">Visibility</label>
+                    <select class="form-select">
+                      <option value="1" selected="">Private</option>
+                      <option value="2">Public</option>
+                      <option value="3">Hidden</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label class="form-label">Client name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label class="form-label">Reporting period</label>
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div>
+                    <label class="form-label">Additional information</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                Cancel
+              </a>
+              <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Create new report
+              </a>
             </div>
           </div>
         </div>

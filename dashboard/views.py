@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from dashboard.models import Product, Category
 from dashboard.forms import ProductForm, CategoryForm
 from django.contrib import messages
+from dynamic_preferences.registries import global_preferences_registry
+
+# We instantiate a manager for our global preferences
+global_preferences = global_preferences_registry.manager()
 
 def index(request):
   return render(request, 'dashboard.html', {"title": "Buscar Producto"})
@@ -53,10 +57,11 @@ def search(request):
 
 def get_product(request):
   if request.method == "GET":
+    currency = global_preferences['general__currency_symbol']
     product_id = request.GET.get('product_id')
     product = Product.objects.get(id=product_id)
     category = Category.objects.get(id=product.category)
-    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category})
+    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency})
   else:
     pass
   
@@ -64,6 +69,6 @@ def get_product(request):
 
 def settings(request):
   if request.method == "POST":
-    
+    pass
   
   return render(request, 'settings.html', {"title": "Configuración"})
