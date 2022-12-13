@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from dashboard.models import Product, Category
 from dashboard.forms import ProductForm, CategoryForm
 from django.contrib import messages
 from dynamic_preferences.registries import global_preferences_registry
+import json
 
 # We instantiate a manager for our global preferences
 global_preferences = global_preferences_registry.manager()
@@ -45,6 +46,7 @@ def add_category(request):
   
   return render(request, 'add-category.html', {"title": "Agregar Categoría"})
 
+#Search product
 def search(request):
   if request.method == "GET":
     product_name = request.GET.get('product_name')
@@ -55,6 +57,7 @@ def search(request):
   
   return
 
+# Product page
 def get_product(request):
   if request.method == "GET":
     currency = global_preferences['general__currency_symbol']
@@ -75,7 +78,6 @@ def get_product(request):
       messages.error(request, "Error al actualizar el producto")
       messages.error(request, form.errors)
       return redirect(request.META.get('HTTP_REFERER'))
-    
   else:
     pass
   
@@ -86,3 +88,15 @@ def settings(request):
     pass
   
   return render(request, 'settings.html', {"title": "Configuración"})
+
+# Api search
+def api_search(request):
+  if request.method == "GET":
+    term = request.GET.get('term')
+    data = []
+    if term:
+        items = Product.objects.filter(name__icontains=term).values('id','name')
+        serialized_data = list(items)
+        data = json.dumps(serialized_data)
+
+    return HttpResponse(data, content_type='application/json')
