@@ -61,7 +61,21 @@ def get_product(request):
     product_id = request.GET.get('product_id')
     product = Product.objects.get(id=product_id)
     category = Category.objects.get(id=product.category)
-    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency})
+    categories = Category.objects.all()
+    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories})
+  elif request.method == "POST":
+    product_id = request.POST.get('id')
+    product = Product.objects.get(id=product_id)
+    form = ProductForm(request.POST, request.FILES, instance=product)
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Producto actualizado correctamente")
+      return redirect(request.META.get('HTTP_REFERER'))
+    else:
+      messages.error(request, "Error al actualizar el producto")
+      messages.error(request, form.errors)
+      return redirect(request.META.get('HTTP_REFERER'))
+    
   else:
     pass
   
