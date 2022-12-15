@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from dashboard.models import Product, Category
-from dashboard.forms import ProductForm, CategoryForm
+from dashboard.models import Product, Category, Storage
+from dashboard.forms import ProductForm, CategoryForm, StorageForm
 from django.contrib import messages
 from dynamic_preferences.registries import global_preferences_registry
 import json
@@ -98,3 +98,19 @@ def api_search(request):
         data = json.dumps(serialized_data)
 
     return HttpResponse(data, content_type='application/json')
+
+# add storage location
+def add_storage_location(request):
+  if request.method == "POST":
+    storage_form = StorageForm(request.POST)
+    if storage_form.is_valid():
+      storage_form.save()
+      messages.success(request, "Ubicación agregada correctamente")
+    else:
+      messages.error(request, "Error al agregar la ubicación")
+      messages.error(request, storage_form.errors)
+    return redirect('dashboard:add_storage')
+  else:
+    storage_form = StorageForm()
+    storages = Storage.objects.all()
+  return render(request, 'add-storage.html', {"title": "Agregar Ubicación", "storage_form": storage_form, "storages": storages})

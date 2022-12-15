@@ -1,6 +1,6 @@
 from django.db import models
 
-# product model
+# Product model
 class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
@@ -35,3 +35,17 @@ class Settings(models.Model):
     class Meta:
         verbose_name_plural = "Settings"
         verbose_name = "Setting"
+
+# Storage model
+class Storage(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
+    location = models.CharField(max_length=200)
+    parent_storage = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Storages"
+        verbose_name = "Storage"

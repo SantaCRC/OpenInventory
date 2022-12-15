@@ -227,8 +227,8 @@
                                     <a class="dropdown-item" href="./invoice.html">
                                     {{_('Project')}}
                                     </a>
-                                    <a class="dropdown-item" href="./search-results.html">
-                                    Search results
+                                    <a class="dropdown-item" href="{% url 'dashboard:add_storage' %}">
+                                    {{_('Storage')}}
                                     </a>
                                     <a class="dropdown-item" href="./pricing.html">
                                     Pricing cards
@@ -524,16 +524,19 @@
                       dataType: "json",
                       success: function(data) {
                           $("#search-results").empty();
+                          var items = 0;
                           var resp = $.map(data, function(obj) {
-                            $("#search-results").addClass("show");
-                            $("#search-results").append("<a class='dropdown-item d-flex align-items-center' href='{% url 'dashboard:get_product' %}/"+obj.id+"'><span class='avatar me-3' style='background-image: url({{ obj.image }})'></span><div><strong>"+obj.name+"</strong><div class='text-muted'>"+obj.description+"</div></div></a>");
+                              items++;
+                              if (items <= 5) {
+                                 $("#search-results").addClass("show");
+                                 $("#search-results").append("<a class='dropdown-item d-flex align-items-center' href='{% url 'dashboard:get_product' %}/"+obj.id+"'><span class='avatar me-3' style='background-image: url({{ obj.image }})'></span><div><strong>"+obj.name+"</strong><div class='text-muted'>"+obj.description+"</div></div></a>");
+                              }
                           });
-                          response(resp);
                       },
 
                     });
                 },
-                minLength: 1,
+                minLength: 3,
               }).keyup(function() {
                 if ($(this).val() == "") {
                   $("#search-results").removeClass("show");
