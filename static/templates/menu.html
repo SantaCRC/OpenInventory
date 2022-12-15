@@ -530,10 +530,15 @@
                           });
                           response(resp);
                       },
+
                     });
                 },
                 minLength: 1,
-              });
+              }).keyup(function() {
+                if ($(this).val() == "") {
+                  $("#search-results").removeClass("show");
+                }
+              })
           });
       </script>
    </body>
