@@ -8,6 +8,7 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('add', views.add, name='add'),
     path('add-category', views.add_category, name='category'),
-    path('get-product', views.get_product, name='get_product'),
     path('search', views.api_search, name='search'),
+    path('get-product/<int:product_id>', views.get_product, name='get_product'),
+    path('get-product', views.get_product, name='get_product'),
 ]

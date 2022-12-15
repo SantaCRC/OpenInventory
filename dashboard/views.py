@@ -58,15 +58,13 @@ def search(request):
   return
 
 # Product page
-def get_product(request):
-  if request.method == "GET":
-    currency = global_preferences['general__currency_symbol']
-    product_id = request.GET.get('product_id')
-    product = Product.objects.get(id=product_id)
-    category = Category.objects.get(id=product.category)
-    categories = Category.objects.all()
-    return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories})
-  elif request.method == "POST":
+def get_product(request, product_id):
+  currency = global_preferences['general__currency_symbol']
+  product = Product.objects.get(id=product_id)
+  category = Category.objects.get(id=product.category)
+  categories = Category.objects.all()
+  
+  if request.method == "POST":
     product_id = request.POST.get('id')
     product = Product.objects.get(id=product_id)
     form = ProductForm(request.POST, request.FILES, instance=product)
@@ -81,7 +79,7 @@ def get_product(request):
   else:
     pass
   
-  return render(request, 'product.html', {"title": "Producto", "product": 'Ninguno'})
+  return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories})
 
 def settings(request):
   if request.method == "POST":
