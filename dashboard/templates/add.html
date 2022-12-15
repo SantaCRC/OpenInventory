@@ -85,6 +85,21 @@
                 </div>
               </div>
               <div class="mb-3">
+                <label class="form-label">{{_('Location')}}</label>
+                <select
+                  type="text"
+                  class="form-select"
+                  placeholder="Select a date"
+                  id="select-tags2"
+                  value=""
+                  name="location"
+                >
+                  {% for location in locations %}
+                  <option value="{{location.id}}">{{location.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="mb-3">
                 <label class="form-label">{{_('Category')}}</label>
                 <select
                   type="text"
@@ -118,6 +133,46 @@
         var el;
         window.TomSelect &&
           new TomSelect((el = document.getElementById("select-tags")), {
+            copyClassesToDropdown: false,
+            dropdownClass: "dropdown-menu ts-dropdown",
+            optionClass: "dropdown-item",
+            controlInput: "<input>",
+            render: {
+              item: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+              option: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+            },
+          });
+      });
+      // @formatter:on
+    </script>
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+        var el;
+        window.TomSelect &&
+          new TomSelect((el = document.getElementById("select-tags2")), {
             copyClassesToDropdown: false,
             dropdownClass: "dropdown-menu ts-dropdown",
             optionClass: "dropdown-item",

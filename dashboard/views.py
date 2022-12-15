@@ -29,7 +29,8 @@ def add(request):
     product_form = ProductForm()
     products = Product.objects.all()
     categories = Category.objects.all()
-  return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories})
+    locations = Storage.objects.all()
+  return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations})
 
 def add_category(request):
   if request.method == "POST":
@@ -63,6 +64,7 @@ def get_product(request, product_id):
   product = Product.objects.get(id=product_id)
   category = Category.objects.get(id=product.category)
   categories = Category.objects.all()
+  location = Storage.objects.get(id=product.location)
   
   if request.method == "POST":
     product_id = request.POST.get('id')
@@ -79,7 +81,7 @@ def get_product(request, product_id):
   else:
     pass
   
-  return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories})
+  return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories, "location": location})
 
 def settings(request):
   if request.method == "POST":

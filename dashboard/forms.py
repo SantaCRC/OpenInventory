@@ -10,7 +10,7 @@ class ProductForm(forms.ModelForm):
         self.helper.form_show_labels = False # hide labels
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'stock', 'category','image']
+        fields = ['name', 'description', 'price', 'stock', 'category','image', 'location']
 
 class CategoryForm(forms.ModelForm):
   def __init__(self, *args, **kwargs):

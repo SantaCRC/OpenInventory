@@ -7,6 +7,7 @@ class Product(models.Model):
     price = models.IntegerField()
     stock = models.IntegerField()
     category = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
