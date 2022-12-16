@@ -83,15 +83,37 @@
                </div>
                <div class="card-footer text-end">
                   <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-stock">
-                  {{_('Add stock')}}
+                  {{_('Edit stock')}}
                   </a>
                   <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-update">
                   {{_('Update product')}}
                   </a>
+                  <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete">
+                     {{_('Delete product')}}
+                     </a>
                </div>
             </div>
          </div>
       </div>
+      <div class="modal modal-blur fade" id="modal-delete" tabindex="-1" style="display: none;" aria-hidden="true">
+         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+           <div class="modal-content">
+            <form method="post">
+             <div class="modal-body">
+            
+                  {% csrf_token %}
+               <div class="modal-title">{{_('Are you sure?')}}</div>
+               <div>{{_('If you proceed, you will lose all product data<')}}/div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">{{_('Cancel')}}</button>
+               <button class="btn btn-danger" data-bs-dismiss="modal" name="option" value="delete_product">{{_('Yes, delete product')}}</button>
+             </div>
+           </div>
+           </form>
+         </div>
+       </div>
+
       <div class="modal modal-blur fade" id="modal-update" tabindex="-1" style="display: none;" aria-hidden="true">
          <form method="post">
             {% csrf_token %}
@@ -121,7 +143,6 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <div class="mb-3">
-                              <input type="hidden" name="id" value="{{product.id}}">
                               <label class="form-label">{{_('Stock')}}</label>
                               <input type="number" class="form-control" value="{{product.stock}}" name="stock">
                            </div>
@@ -179,24 +200,35 @@
          </div>
       </div>
       <form method="post">
+      {% csrf_token %}
       <div class="modal modal-blur fade" id="modal-stock" tabindex="-1" style="display: none;" aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title">{{_('Add stock')}}</h5>
+                  <h5 class="modal-title">{{_('Edit stock')}}</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                   <div class="mb-3">
                      <label class="form-label">{{_('Stock')}}</label>
-                     <input type="number" class="form-control" name="stock" value="{{product.stock}}">
+                     <input type="number" class="form-control" name="stock" value="0">
                   </div>
                </div>
-               <div class="modal-footer">
+               <div class="modal-footer align-items-center">
+                  <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
                   <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   {{_('Cancel')}}
                   </a>
-                  <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+               </div>
+                  <button class="btn btn-danger ms-auto" data-bs-dismiss="modal" name="option" value="delete">
+                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                     </svg>
+                     {{_('Delete stock')}}
+                  </button>
+                  <button class="btn btn-primary ms-auto" data-bs-dismiss="modal" name="option" value="add">
                      <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -204,7 +236,8 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                      </svg>
                      {{_('Add stock')}}
-                  </a>
+                  </button>
+               </form>
                </div>
             </div>
          </div>

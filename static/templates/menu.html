@@ -529,7 +529,10 @@
                               items++;
                               if (items <= 5) {
                                  $("#search-results").addClass("show");
-                                 $("#search-results").append("<a class='dropdown-item d-flex align-items-center' href='{% url 'dashboard:get_product' %}/"+obj.id+"'><span class='avatar me-3' style='background-image: url({{ obj.image }})'></span><div><strong>"+obj.name+"</strong><div class='text-muted'>"+obj.description+"</div></div></a>");
+                                 if(obj.description.length > 10) obj.description = obj.description.substring(0,30) + "...";
+                                 if(obj.image == null) obj.image = "default.png";
+                                 if(obj.name.length > 30) obj.name = obj.name.substring(0,30) + "...";
+                                 $("#search-results").append("<a class='dropdown-item d-flex align-items-center' href='{% url 'dashboard:get_product' %}/"+obj.id+"'><span class='avatar me-3' style='background-image: url(/media/"+obj.image+")'></span><div><strong>"+obj.name+"</strong><div class='text-muted'>"+obj.description+"</div></div></a>");
                               }
                           });
                       },

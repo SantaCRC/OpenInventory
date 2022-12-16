@@ -58,7 +58,7 @@ def search(request):
   
   return
 
-# Product page
+# Product page and options (edit, delete, add stock, delete stock)
 def get_product(request, product_id):
   currency = global_preferences['general__currency_symbol']
   product = Product.objects.get(id=product_id)
@@ -67,17 +67,47 @@ def get_product(request, product_id):
   location = Storage.objects.get(id=product.location)
   
   if request.method == "POST":
-    product_id = request.POST.get('id')
     product = Product.objects.get(id=product_id)
     form = ProductForm(request.POST, request.FILES, instance=product)
-    if form.is_valid():
-      form.save()
-      messages.success(request, "Producto actualizado correctamente")
+    option = request.POST.get('option')
+    
+    if option == "add":
+      stock = request.POST.get('stock')
+      product.stock = product.stock + int(stock)
+      product.save()
+      messages.success(request, "Stock actualizado correctamente")
       return redirect(request.META.get('HTTP_REFERER'))
+    
+    elif option == "delete":
+      stock = request.POST.get('stock')
+      if product.stock == 0:
+        messages.error(request, "No hay stock para eliminar")
+        return redirect(request.META.get('HTTP_REFERER'))
+      if product.stock < int(stock):
+        messages.error(request, "No hay suficiente stock para eliminar")
+        return redirect(request.META.get('HTTP_REFERER'))
+      product.stock = product.stock - int(stock)
+      product.save()
+      messages.success(request, "Stock actualizado correctamente")
+      return redirect(request.META.get('HTTP_REFERER'))
+    
+    elif option == "delete_product":
+      product.delete()
+      messages.success(request, "Producto eliminado correctamente")
+      return redirect("dashboard:index")
+    
     else:
-      messages.error(request, "Error al actualizar el producto")
-      messages.error(request, form.errors)
-      return redirect(request.META.get('HTTP_REFERER'))
+      
+      if form.is_valid():
+        form.save()
+        messages.success(request, "Producto actualizado correctamente")
+        return redirect(request.META.get('HTTP_REFERER'))
+      
+      else:
+        messages.error(request, "Error al actualizar el producto")
+        messages.error(request, form.errors)
+        return redirect(request.META.get('HTTP_REFERER'))
+      
   else:
     pass
   
@@ -95,7 +125,7 @@ def api_search(request):
     term = request.GET.get('term')
     data = []
     if term:
-        items = Product.objects.filter(name__icontains=term).values('id','name')
+        items = Product.objects.filter(name__icontains=term).values('id','name', 'price', 'category', 'location', 'image', 'description')
         serialized_data = list(items)
         data = json.dumps(serialized_data)
 
