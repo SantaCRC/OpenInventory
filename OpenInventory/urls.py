@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', include('dashboard.urls')),
+    path('qr_code/', include('qr_code.urls', namespace="qr_code"))
 ]
 
 if settings.DEBUG: #development

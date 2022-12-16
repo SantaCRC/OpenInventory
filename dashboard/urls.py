@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'dashboard'
@@ -12,4 +12,5 @@ urlpatterns = [
     path('get-product/<int:product_id>', views.get_product, name='get_product'),
     path('get-product', views.get_product, name='get_product'),
     path('add-storage', views.add_storage_location, name='add_storage'),
+    path('qr_code/', include('qr_code.urls', namespace="qr_code")),
 ]

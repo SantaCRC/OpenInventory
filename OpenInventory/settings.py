@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'crispy_forms',
     'dynamic_preferences',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
