@@ -13,4 +13,5 @@ urlpatterns = [
     path('get-product', views.get_product, name='get_product'),
     path('add-storage', views.add_storage_location, name='add_storage'),
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),
+    path('view-products', views.view_products, name='view_products'),
 ]

@@ -65,6 +65,7 @@ def get_product(request, product_id):
   category = Category.objects.get(id=product.category)
   categories = Category.objects.all()
   location = Storage.objects.get(id=product.location)
+  locations = Storage.objects.all()
   
   if request.method == "POST":
     product = Product.objects.get(id=product_id)
@@ -111,7 +112,7 @@ def get_product(request, product_id):
   else:
     pass
   
-  return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories, "location": location})
+  return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories, "location": location, "locations": locations})
 
 def settings(request):
   if request.method == "POST":
@@ -146,3 +147,12 @@ def add_storage_location(request):
     storage_form = StorageForm()
     storages = Storage.objects.all()
   return render(request, 'add-storage.html', {"title": "Agregar Ubicación", "storage_form": storage_form, "storages": storages})
+
+# view list of products
+
+def view_products(request):
+  products = Product.objects.all()
+  locations = Storage.objects.all()
+  locations = list(locations)
+  currency = global_preferences['general__currency_symbol']
+  return render(request, 'view-products.html', {"title": "Productos", "products": products, "locations": locations, "currency": currency})  
