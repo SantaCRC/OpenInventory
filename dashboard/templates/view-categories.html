@@ -22,7 +22,7 @@
             <div class="row g-2 align-items-center">
               <div class="col">
                 <h2 class="page-title">
-                  {{_('Products')}}
+                  {{_('Categories')}}
                 </h2>
               </div>
             </div>
@@ -38,20 +38,16 @@
                     <thead>
                       <tr>
                         <th><button class="table-sort" data-sort="sort-name">{{_('Name')}}</button></th>
-                        <th><button class="table-sort" data-sort="sort-location">{{_('Location')}}</button></th>
-                        <th><button class="table-sort" data-sort="sort-category">{{_('Category')}}</button></th>
-                        <th><button class="table-sort" data-sort="sort-price">{{_('Price')}}</button></th>
-                        <th><button class="table-sort" data-sort="sort-stock">{{_('Stock')}}</button></th>
+                        <th><button class="table-sort" data-sort="sort-id">{{_('ID')}}</button></th>
+                        <th><button class="table-sort" data-sort="sort-parent">{{_('Parent category')}}</button></th>
                       </tr>
                     </thead>
                     <tbody class="table-tbody">
-                    {% for product in products %}
+                    {% for category in categories %}
                       <tr>
-                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_product' product.id %}">{{ product.name }}</a></td>
-                        <td class="sort-location">{% get_location locations product.location %}</td>
-                        <td class="sort-category">{% get_category categories product.category %}</td>
-                        <td class="sort-price">{{ product.price }}</td>
-                        <td class="sort-stock">{{ product.stock }}</td>
+                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_category' category.id %}">{{ category.name }}</a></td>
+                        <td class="sort-id">{{ category.id }}</td>
+                        <td class="sort-parent">{{ category.parent_category }}</td>
                       </tr>
                  
                     {% endfor %}
@@ -63,12 +59,13 @@
           </div>
         </div>
       </div>
+    </div>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
       const list = new List('table-default', {
       	sortClass: 'table-sort',
       	listClass: 'table-tbody',
-      	valueNames: [ 'sort-name', 'sort-location', 'sort-category', 'sort-stock', 'sort-price' ,
+      	valueNames: [ 'sort-name', 'sort-id', 'sort-category', 'sort-stock', 'sort-price' ,
       		{ attr: 'data-date', name: 'sort-date' },
       		{ attr: 'data-progress', name: 'sort-progress' },
       		'sort-quantity'

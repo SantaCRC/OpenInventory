@@ -170,4 +170,29 @@ def view_products(request):
   locations = list(locations)
   categories = Category.objects.all()
   currency = global_preferences['general__currency_symbol']
-  return render(request, 'view-products.html', {"title": "Productos", "products": products, "locations": locations, "currency": currency, "categories": categories })  
+  return render(request, 'view-products.html', {"title": "Productos", "products": products, "locations": locations, "currency": currency, "categories": categories }) 
+
+# view list of categories
+def view_categories(request):
+  categories = Category.objects.all()
+  return render(request, 'view-categories.html', {"title": "Categorías", "categories": categories})
+
+# get category
+def get_category(request, category_id):
+  if request.method == "POST":
+    category = Category.objects.get(id=category_id)
+    form = CategoryForm(request.POST, instance=category)
+    option = request.POST.get('option')
+    
+    if option == "delete_category":
+      category.delete()
+      messages.success(request, "Categoría eliminada correctamente")
+      return redirect("dashboard:view_categories")
+    
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Categoría actualizada correctamente")
+      return redirect(request.META.get('HTTP_REFERER'))
+    
+  category = Category.objects.get(id=category_id)
+  return render(request, 'category.html', {"title": "Categoría", "category": category}) 
