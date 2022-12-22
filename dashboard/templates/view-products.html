@@ -47,7 +47,7 @@
                     <tbody class="table-tbody">
                     {% for product in products %}
                       <tr>
-                        <td class="sort-name"><a href="{% url 'dashboard:get_product' product.id %}">{{ product.name }}</a></td>
+                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_product' product.id %}">{{ product.name }}</a></td>
                         <td class="sort-location">{% get_location locations product.location %}</td>
                         <td class="sort-category">{% get_category categories product.category %}</td>
                         <td class="sort-price">{{ product.price }}</td>
