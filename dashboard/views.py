@@ -8,23 +8,35 @@ import json
 # We instantiate a manager for our global preferences
 global_preferences = global_preferences_registry.manager()
 
+#get index page
 def index(request):
   return render(request, 'dashboard.html', {"title": "Buscar Producto"})
 
+# get settings page
 def settings(request):
   return render(request, 'settings.html', {"title": "Configuración"})
 
+# Add product to inventory
 def add(request):
   if request.method == "POST":
+    error_message = ""
     product_form = ProductForm(request.POST, request.FILES)
     if product_form.is_valid():
       product_form.save()
       messages.success(request, "Producto agregado correctamente")
+      message = 'ok'
     else:
       messages.error(request, "Error al agregar el producto")
       messages.error(request, product_form.errors)
+      message = 'error'
+      error_message = product_form.errors
+
+    product_form = ProductForm()
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    locations = Storage.objects.all()
     
-    return redirect('dashboard:add')
+    return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations, "message": message, "error_message": error_message})
   else:
     product_form = ProductForm()
     products = Product.objects.all()
@@ -32,7 +44,9 @@ def add(request):
     locations = Storage.objects.all()
   return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations})
 
+# add category
 def add_category(request):
+  categories = Category.objects.all()
   if request.method == "POST":
     category_form = CategoryForm(request.POST)
     if category_form.is_valid():
@@ -45,7 +59,7 @@ def add_category(request):
   else:
     category_form = CategoryForm()
   
-  return render(request, 'add-category.html', {"title": "Agregar Categoría"})
+  return render(request, 'add-category.html', {"title": "Agregar Categoría","categories": categories})
 
 #Search product
 def search(request):
@@ -114,6 +128,7 @@ def get_product(request, product_id):
   
   return render(request, 'product.html', {"title": "Producto", "product": product, "category": category, "currency": currency, "categories": categories, "location": location, "locations": locations})
 
+# get settings page
 def settings(request):
   if request.method == "POST":
     pass
@@ -149,10 +164,10 @@ def add_storage_location(request):
   return render(request, 'add-storage.html', {"title": "Agregar Ubicación", "storage_form": storage_form, "storages": storages})
 
 # view list of products
-
 def view_products(request):
   products = Product.objects.all()
   locations = Storage.objects.all()
   locations = list(locations)
+  categories = Category.objects.all()
   currency = global_preferences['general__currency_symbol']
-  return render(request, 'view-products.html', {"title": "Productos", "products": products, "locations": locations, "currency": currency})  
+  return render(request, 'view-products.html', {"title": "Productos", "products": products, "locations": locations, "currency": currency, "categories": categories })  

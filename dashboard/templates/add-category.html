@@ -71,13 +71,9 @@
                   value=""
                   name="parent_category"
                 >
-                  <option value="HTML">HTML</option>
-                  <option value="JavaScript">JavaScript</option>
-                  <option value="CSS">CSS</option>
-                  <option value="jQuery">jQuery</option>
-                  <option value="Bootstrap">Bootstrap</option>
-                  <option value="Ruby">Ruby</option>
-                  <option value="Python">Python</option>
+                  {% for category in categories %}
+                  <option value="{{category.id}}">{{category.name}}</option>
+                  {% endfor %}
                 </select>
               </div>
             </div>

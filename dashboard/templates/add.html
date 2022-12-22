@@ -34,6 +34,19 @@
     <div class="container-xl">
       <div class="page-body">
         <div class="card-body">
+          {% if message == 'ok'%}
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-title">{{_('Product added successfully')}}</h4>
+            <div class="text-muted">{{_('All data saved')}}</div>
+          </div>
+          {% endif %}
+          {% if message == 'error'%}
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-title">{{_('Error')}}</h4>
+            <div class="text-muted">{{_('Something went wrong')}}</div>
+            <div class="text-muted">{{ error_message }}</div>
+          </div>
+          {% endif %}
           <form class="card" method="post" action="{% url 'dashboard:add' %}"
           enctype="multipart/form-data">
             {% csrf_token %}
@@ -62,18 +75,19 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label class="form-label">{{_('Stock')}}</label>
+                <label class="form-label required">{{_('Stock')}}</label>
                 <div class="input-group mb-2">
                   <input
                     type="number"
                     class="form-control"
                     autocomplete="off"
                     name="stock"
+                    required
                   />
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label">{{_('Price')}}</label>
+                <label class="form-label required">{{_('Price')}}</label>
                 <div class="input-group mb-2">
                   <span class="input-group-text"> $ </span>
                   <input
@@ -81,6 +95,7 @@
                     class="form-control"
                     autocomplete="off"
                     name="price"
+                    required
                   />
                 </div>
               </div>
@@ -89,7 +104,7 @@
                 <select
                   type="text"
                   class="form-select"
-                  placeholder="Select a date"
+                  placeholder="{{_('Select a location')}}"
                   id="select-tags2"
                   value=""
                   name="location"
@@ -104,7 +119,7 @@
                 <select
                   type="text"
                   class="form-select"
-                  placeholder="Select a date"
+                  placeholder="{{_('Select a category')}}"
                   id="select-tags"
                   value=""
                   name="category"
@@ -120,7 +135,7 @@
               </div>
             </div>
             <div class="card-footer text-end">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">{{_('Submit')}}</button>
             </div>
           </form>
         </div>
