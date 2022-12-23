@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style>
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
+
+    {% extends 'menu.html' %} 
+    {% load static %} 
+    {% block pagecontent %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    {% load crispy_forms_tags %}
+    <div class="page-header d-print-none">
+      <div class="container-xl">
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              {{_("New category")}}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-xl">
+      <div class="page-body">
+        <div class="card-body">
+          <form class="card" method="post" action="{% url 'dashboard:category' %}"
+          enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-header">
+              <h3 class="card-title">{{_("Add new category")}}</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label required">{{_('Name')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="{{_('Enter name')}}"
+                    name="name"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_("Description")}}</label>
+                <textarea
+                  class="form-control"
+                  rows="6"
+                  placeholder="{{_('Enter description')}}"
+                  name="description"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">{{_('Parent category')}}</label>
+                <select
+                  type="text"
+                  class="form-select"
+                  placeholder="Select a date"
+                  id="select-tags"
+                  value=""
+                  name="parent_category"
+                >
+                  {% for category in categories %}
+                  <option value="{{category.id}}">{{category.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="card-footer text-end">
+              <button type="submit" class="btn btn-primary">{{_('Submit')}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+        var el;
+        window.TomSelect &&
+          new TomSelect((el = document.getElementById("select-tags")), {
+            copyClassesToDropdown: false,
+            dropdownClass: "dropdown-menu ts-dropdown",
+            optionClass: "dropdown-item",
+            controlInput: "<input>",
+            render: {
+              item: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+              option: function (data, escape) {
+                if (data.customProperties) {
+                  return (
+                    '<div><span class="dropdown-item-indicator">' +
+                    data.customProperties +
+                    "</span>" +
+                    escape(data.text) +
+                    "</div>"
+                  );
+                }
+                return "<div>" + escape(data.text) + "</div>";
+              },
+            },
+          });
+      });
+      // @formatter:on
+    </script>
+    {% endblock %}
+  </body>
+</html>

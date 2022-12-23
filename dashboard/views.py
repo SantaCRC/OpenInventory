@@ -36,13 +36,13 @@ def add(request):
     categories = Category.objects.all()
     locations = Storage.objects.all()
     
-    return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations, "message": message, "error_message": error_message})
+    return render(request, 'add-product.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations, "message": message, "error_message": error_message})
   else:
     product_form = ProductForm()
     products = Product.objects.all()
     categories = Category.objects.all()
     locations = Storage.objects.all()
-  return render(request, 'add.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations})
+  return render(request, 'add-product.html', {"title": "Agregar Producto", "product_form": product_form, "products": products, "categories": categories, "locations": locations})
 
 # add category
 def add_category(request):
