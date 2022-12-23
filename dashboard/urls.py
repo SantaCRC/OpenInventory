@@ -17,4 +17,6 @@ urlpatterns = [
     path('view-categories', views.view_categories, name='view_categories'),
     path('category/<int:category_id>', views.get_category, name='get_category'),
     path('add-project', views.add_project, name='add_project'),
+    path('view-projects', views.view_projects, name='view_projects'),
+    path('view-storages', views.view_storages, name='view_storages'),
 ]

@@ -212,3 +212,13 @@ def add_project(request):
     project_form = ProjectForm()
     projects = Project.objects.all()
   return render(request, 'add-project.html', {"title": "Agregar Proyecto", "project_form": project_form, "projects": projects})
+
+# view list of projects
+def view_projects(request):
+  projects = Project.objects.all()
+  return render(request, 'view-projects.html', {"title": "Proyectos", "projects": projects})
+
+# view storages
+def view_storages(request):
+  storages = Storage.objects.all()
+  return render(request, 'view-storages.html', {"title": "Ubicaciones", "storages": storages})

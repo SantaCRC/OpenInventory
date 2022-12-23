@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% extends 'menu.html' %}
+{% block pagecontent %}
+{% load custom_tags %}
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta16
+* @link https://tabler.io
+* Copyright 2018-2022 The Tabler Authors
+* Copyright 2018-2022 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <body >
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  {{_('Storages')}}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card">
+              <div class="card-body">
+                <div id="table-default" class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort" data-sort="sort-name">{{_('Name')}}</button></th>
+                        <th><button class="table-sort" data-sort="sort-location">{{_('Location')}}</button></th>
+                        <th><button class="table-sort" data-sort="sort-parent">{{_('Parent storage')}}</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody">
+                    {% for storage in storages %}
+                      <tr>
+                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_category' storage.id %}">{{ storage.name }}</a></td>
+                        <td class="sort-id">{{ storage.location }}</td>
+                        <td class="sort-parent">{{ storage.parent_storage }}</td>
+                      </tr>
+                 
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const list = new List('table-default', {
+      	sortClass: 'table-sort',
+      	listClass: 'table-tbody',
+      	valueNames: [ 'sort-name', 'sort-location', 'sort-parent',
+      	]
+      });
+      })
+    </script>
+  </body>
+</html>
+{% endblock %}
+</body>
+</html>
