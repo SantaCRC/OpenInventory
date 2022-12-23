@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from dashboard.models import Product, Category, Storage
-from dashboard.forms import ProductForm, CategoryForm, StorageForm
+from dashboard.models import Product, Category, Storage, Project
+from dashboard.forms import ProductForm, CategoryForm, StorageForm, ProjectForm
 from django.contrib import messages
 from dynamic_preferences.registries import global_preferences_registry
 import json
@@ -196,3 +196,19 @@ def get_category(request, category_id):
     
   category = Category.objects.get(id=category_id)
   return render(request, 'category.html', {"title": "Categoría", "category": category}) 
+
+# add project
+def add_project(request):
+  if request.method == "POST":
+    project_form = ProjectForm(request.POST)
+    if project_form.is_valid():
+      project_form.save()
+      messages.success(request, "Proyecto agregado correctamente")
+    else:
+      messages.error(request, "Error al agregar el proyecto")
+      messages.error(request, project_form.errors)
+    return redirect('dashboard:add_project')
+  else:
+    project_form = ProjectForm()
+    projects = Project.objects.all()
+  return render(request, 'add-project.html', {"title": "Agregar Proyecto", "project_form": project_form, "projects": projects})

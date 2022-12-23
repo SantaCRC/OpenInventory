@@ -50,3 +50,13 @@ class Storage(models.Model):
     class Meta:
         verbose_name_plural = "Storages"
         verbose_name = "Storage"
+
+# Project model
+class Project(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
+    location = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
