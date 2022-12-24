@@ -34,7 +34,7 @@
     <div class="container-xl">
       <div class="page-body">
         <div class="card-body">
-          <form class="card" method="post" action="{% url 'dashboard:category' %}"
+          <form class="card" method="post" action="{% url 'dashboard:add_project' %}"
           enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card-header">
@@ -66,7 +66,7 @@
                 <select
                   type="text"
                   class="form-select"
-                  placeholder="Select a date"
+                  placeholder="{{_('Select location')}}"
                   id="select-tags"
                   value=""
                   name="parent_category"
