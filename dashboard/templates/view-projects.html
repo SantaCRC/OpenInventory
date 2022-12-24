@@ -22,7 +22,7 @@
             <div class="row g-2 align-items-center">
               <div class="col">
                 <h2 class="page-title">
-                  {{_('Storages')}}
+                  {{_('Projects')}}
                 </h2>
               </div>
             </div>
@@ -43,11 +43,11 @@
                       </tr>
                     </thead>
                     <tbody class="table-tbody">
-                    {% for storage in storages %}
+                    {% for project in projects %}
                       <tr>
-                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_storage' storage.id %}">{{ storage.name }}</a></td>
-                        <td class="sort-id">{{ storage.location }}</td>
-                        <td class="sort-parent">{{ storage.parent_storage }}</td>
+                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_storage' project.id %}">{{ project.name }}</a></td>
+                        <td class="sort-id">{{ project.location }}</td>
+                        <td class="sort-parent">{{ project.parent_storage }}</td>
                       </tr>
                  
                     {% endfor %}

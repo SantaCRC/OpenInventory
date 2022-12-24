@@ -21,3 +21,9 @@ def get_category(list, category_id):
 @register.simple_tag
 def settings_value(name):
     return getattr(settings, name, "")
+
+# Helper function to get storage
+@register.simple_tag
+def get_storage(list, storage_id):
+    storage_id = int(storage_id)
+    return list[storage_id-1]

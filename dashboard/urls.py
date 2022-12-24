@@ -19,4 +19,6 @@ urlpatterns = [
     path('add-project', views.add_project, name='add_project'),
     path('view-projects', views.view_projects, name='view_projects'),
     path('view-storages', views.view_storages, name='view_storages'),
+    #path('get-project/<int:project_id>', views.get_project, name='get_project'),
+    path('get-storage/<int:storage_id>', views.get_storage, name='get_storage'),
 ]

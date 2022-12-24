@@ -222,3 +222,23 @@ def view_projects(request):
 def view_storages(request):
   storages = Storage.objects.all()
   return render(request, 'view-storages.html', {"title": "Ubicaciones", "storages": storages})
+
+# get storage
+def get_storage(request, storage_id):
+  if request.method == "POST":
+    storage = Storage.objects.get(id=storage_id)
+    form = StorageForm(request.POST, instance=storage)
+    option = request.POST.get('option')
+    
+    if option == "delete_storage":
+      storage.delete()
+      messages.success(request, "Ubicación eliminada correctamente")
+      return redirect("dashboard:view_storages")
+    
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Ubicación actualizada correctamente")
+      return redirect(request.META.get('HTTP_REFERER'))
+    
+  storage = Storage.objects.get(id=storage_id)
+  return render(request, 'storage.html', {"title": "Ubicación", "storage": storage})
