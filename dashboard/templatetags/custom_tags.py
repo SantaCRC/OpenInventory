@@ -27,3 +27,9 @@ def settings_value(name):
 def get_storage(list, storage_id):
     storage_id = int(storage_id)
     return list[storage_id-1]
+
+# Helper function to get project
+@register.simple_tag
+def get_project(list, project_id):
+    project_id = int(project_id)
+    return list[project_id-1]

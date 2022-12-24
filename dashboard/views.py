@@ -211,7 +211,8 @@ def add_project(request):
   else:
     project_form = ProjectForm()
     projects = Project.objects.all()
-  return render(request, 'add-project.html', {"title": "Agregar Proyecto", "project_form": project_form, "projects": projects})
+    locations = Storage.objects.all()
+  return render(request, 'add-project.html', {"title": "Agregar Proyecto", "project_form": project_form, "projects": projects, "locations": locations})
 
 # view list of projects
 def view_projects(request):
@@ -242,3 +243,24 @@ def get_storage(request, storage_id):
     
   storage = Storage.objects.get(id=storage_id)
   return render(request, 'storage.html', {"title": "Ubicación", "storage": storage})
+
+# get project
+def get_project(request, project_id):
+  if request.method == "POST":
+    project = Project.objects.get(id=project_id)
+    form = ProjectForm(request.POST, instance=project)
+    option = request.POST.get('option')
+    
+    if option == "delete_project":
+      project.delete()
+      messages.success(request, "Proyecto eliminado correctamente")
+      return redirect("dashboard:view_projects")
+    
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Proyecto actualizado correctamente")
+      return redirect(request.META.get('HTTP_REFERER'))
+    
+  project = Project.objects.get(id=project_id)
+  locations = Storage.objects.all()
+  return render(request, 'project.html', {"title": "Proyecto", "project": project, "locations": locations})

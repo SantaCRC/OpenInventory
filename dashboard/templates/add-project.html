@@ -62,17 +62,17 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label class="form-label">{{_('Parent category')}}</label>
+                <label class="form-label">{{_('Location')}}</label>
                 <select
                   type="text"
                   class="form-select"
                   placeholder="{{_('Select location')}}"
                   id="select-tags"
                   value=""
-                  name="parent_category"
+                  name="location"
                 >
-                  {% for category in categories %}
-                  <option value="{{category.id}}">{{category.name}}</option>
+                  {% for location in locations %}
+                  <option value="{{location.id}}">{{location.name}}</option>
                   {% endfor %}
                 </select>
               </div>

@@ -45,7 +45,7 @@
                     <tbody class="table-tbody">
                     {% for project in projects %}
                       <tr>
-                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_storage' project.id %}">{{ project.name }}</a></td>
+                        <td class="sort-name"><a class="text-reset" href="{% url 'dashboard:get_project' project.id %}">{{ project.name }}</a></td>
                         <td class="sort-id">{{ project.location }}</td>
                         <td class="sort-parent">{{ project.parent_storage }}</td>
                       </tr>
